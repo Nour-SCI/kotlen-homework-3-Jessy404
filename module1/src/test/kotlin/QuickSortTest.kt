@@ -1,9 +1,12 @@
 import org.junit.jupiter.api.Assertions.*
+
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
 
+
 internal class QuickSortTest {
+
     companion object {
         @JvmStatic
         fun numbers() = listOf(
@@ -30,5 +33,14 @@ internal class QuickSortTest {
     @MethodSource("numbers")
     fun quickSortImplTest(initialList: List<Int>, expectedList: List<Int>) {
         assertEquals(expectedList, quickSort(initialList))
+    }
+
+    fun quickSort(list: List<Int>): List<Int> {
+        if (list.size <= 1) return list
+        val pivot = list[list.size / 2]
+        val lesser = list.filter { it < pivot }
+        val equal = list.filter { it == pivot }
+        val greater = list.filter { it > pivot }
+        return quickSort(lesser) + equal + quickSort(greater)
     }
 }

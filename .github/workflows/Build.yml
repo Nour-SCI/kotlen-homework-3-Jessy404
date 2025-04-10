@@ -68,5 +68,5 @@ jobs:
         run: chmod +x gradlew
 
       - uses: gradle/gradle-build-action@v2.1.5
-        with:
-          arguments: :module1:test --stacktrace
+       with:
+          arguments: detektCheckAll --stacktrace --warning-mode all
